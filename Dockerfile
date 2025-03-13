@@ -26,4 +26,4 @@ RUN npm run build
 EXPOSE 3000
 
 # Uygulama için uygun başlatma komutu
-CMD ["node", "dist/main.js"]
+CMD ["node", "dist/main"]
