@@ -10,6 +10,9 @@ COPY package*.json ./
 # Üretim bağımlılıklarını yükle
 RUN npm install --omit=dev
 
+# NestJS CLI'yı global olarak yükle
+RUN npm install -g @nestjs/cli
+
 # Tüm dosyaları kopyala
 COPY . .
 
