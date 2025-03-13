@@ -25,5 +25,5 @@ RUN npm run build
 # Portu aç
 EXPOSE 3000
 
-# Uygulamayı başlat
-CMD ["node", "dist/main"]
+# Uygulama için uygun başlatma komutu
+CMD ["node", "dist/main.js"]
