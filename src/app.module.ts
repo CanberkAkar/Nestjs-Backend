@@ -1,28 +1,25 @@
 import { Module } from '@nestjs/common';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import configuration from './config/config'; // Yeni config dosyasını içe aktar
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UserModule } from './user/user.module';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { Users } from './user/entities/user.entity';
-import { ConfigModule } from '@nestjs/config';
+
 @Module({
   imports: [
     ConfigModule.forRoot({
-      isGlobal: true,  
-      envFilePath: '.env',  
+      isGlobal: true,
+      load: [configuration], // Config dosyasını yüklüyoruz
     }),
-    TypeOrmModule.forRoot({
-      type:'mysql',
-      host:process.env.DB_HOST,
-      port:parseInt(process.env.DB_PORT || '3306'),
-      username:process.env.DB_USERNAME,
-      password:process.env.DB_PASSWORD,
-      database:process.env.DB_DATABASE,
-      entities:[Users],
-      synchronize:process.env.DB_SYNC == 'true'
+    TypeOrmModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: (configService: ConfigService) => ({
+        ...configService.get('database'), // database nesnesini al
+      }),
     }),
-    TypeOrmModule.forFeature([Users]),
-    UserModule
+    UserModule,
   ],
   controllers: [AppController],
   providers: [AppService],
