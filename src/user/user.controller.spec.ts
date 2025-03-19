@@ -13,7 +13,7 @@ describe('UserController', () => {
         {
           provide: UserService,
           useValue: {
-            activeUsers: jest.fn().mockReturnValue('Mocked Active Users'),
+            list: jest.fn().mockReturnValue('Mocked Active Users'),
           },
         },
       ],
@@ -28,6 +28,6 @@ describe('UserController', () => {
   });
 
   it('should return active users', () => {
-    expect(controller.activeUsers()).toBe('Mocked Active Users');
+    expect(controller.list()).toBe('Mocked Active Users');
   });
 });
