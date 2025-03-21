@@ -12,7 +12,7 @@ RUN npm install
 
 # NestJS CLI'yı global olarak yükle
 RUN npm install -g @nestjs/cli
-
+ 
 # @types/node paketini yükle
 RUN npm install --save-dev @types/node
 
