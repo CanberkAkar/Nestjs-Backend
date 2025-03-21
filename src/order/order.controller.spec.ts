@@ -1,31 +1,42 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { OrderController } from './order.controller';
 import { OrderService } from './order.service';
+import { getRepositoryToken } from '@nestjs/typeorm';
+import { Order } from './entities/order.entity';
+import { Repository } from 'typeorm';
 
-describe('OrderController', () => {
-  let controller: OrderController;
+describe('OrderService', () => {
   let service: OrderService;
+  let orderRepository: Repository<Order>;
+
   beforeEach(async () => {
+    const mockOrderRepository = {
+      find: jest.fn().mockResolvedValue([]), // `find` metodu taklit ediliyor
+      save: jest.fn().mockResolvedValue({}), // `save` metodu taklit ediliyor
+      findOne: jest.fn().mockResolvedValue({}), // `findOne` metodu taklit ediliyor
+      softDelete: jest.fn().mockResolvedValue({}), // `softDelete` metodu taklit ediliyor
+    };
+
     const module: TestingModule = await Test.createTestingModule({
-      controllers: [OrderController],
       providers: [
+        OrderService,
         {
-          provide: OrderService,
-          useValue: {
-            list: jest.fn().mockReturnValue('Order list'),
-          },
-        }
+          provide: getRepositoryToken(Order), // `Order` entitesi için repository'yi taklit ediyoruz
+          useValue: mockOrderRepository, // Mock repository kullanıyoruz
+        },
       ],
     }).compile();
 
-    controller = module.get<OrderController>(OrderController);
     service = module.get<OrderService>(OrderService);
+    orderRepository = module.get<Repository<Order>>(getRepositoryToken(Order));
   });
 
   it('should be defined', () => {
-    expect(controller).toBeDefined();
+    expect(service).toBeDefined();
   });
-  it('should return order list', () => {
-    expect(controller.list()).toBe('Order list');
+
+  it('should list all orders', async () => {
+    const result = await service.list();
+    expect(result).toEqual({ status: '200', order: [] });
+    expect(orderRepository.find).toHaveBeenCalled();
   });
 });
