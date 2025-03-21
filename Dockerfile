@@ -23,7 +23,7 @@ COPY . .
 RUN npm run build
 
 # Portu aç
-EXPOSE 3003
+EXPOSE 3000
 
 # Uygulama için uygun başlatma komutu
 CMD ["node", "dist/main"]

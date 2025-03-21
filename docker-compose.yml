@@ -6,7 +6,7 @@ services:
     build: .
     restart: always
     ports:
-      - "3003:3003"
+      - "3000:3000"  # Bu yönlendirme 3003 portunu dışarıya açar, 3000 portu konteyner içinde çalışıyor
     environment:
       NODE_ENV: production
     volumes:
