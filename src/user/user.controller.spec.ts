@@ -13,7 +13,7 @@ describe('UserController', () => {
         {
           provide: UserService,
           useValue: {
-            list: jest.fn().mockReturnValue('Mocked Active Users'),
+            list: jest.fn().mockReturnValue('User list'),
           },
         },
       ],
