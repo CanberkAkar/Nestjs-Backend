@@ -12,7 +12,7 @@ describe('OrderController', () => {
         {
           provide: OrderService,
           useValue: {
-            list: jest.fn().mockReturnValue('Mocked Orders'),
+            list: jest.fn().mockReturnValue('Order list'),
           },
         }
       ],
