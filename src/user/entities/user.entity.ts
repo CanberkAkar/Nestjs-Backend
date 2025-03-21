@@ -2,6 +2,7 @@ import { Column, CreateDateColumn, DeleteDateColumn, Entity ,PrimaryGeneratedCol
 
 @Entity()
 export class Users{
+    // BURASI DATABASE ALANLARIMIZDIR
     @Column()
     @PrimaryGeneratedColumn()
     usr_id:number;
