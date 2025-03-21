@@ -27,7 +27,7 @@ describe('UserController', () => {
     expect(controller).toBeDefined();
   });
 
-  it('should return active users', () => {
-    expect(controller.list()).toBe('Mocked Active Users');
+  it('should return user list', () => {
+    expect(controller.list()).toBe('User list');
   });
 });
