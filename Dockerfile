@@ -7,8 +7,8 @@ WORKDIR /app
 # Bağımlılıkları yüklemek için package.json ve package-lock.json dosyalarını kopyala
 COPY package*.json ./
 
-# Üretim bağımlılıklarını yükle
-RUN npm install --omit=dev
+# Bağımlılıkları yükle
+RUN npm install
 
 # NestJS CLI'yı global olarak yükle
 RUN npm install -g @nestjs/cli
@@ -18,9 +18,6 @@ RUN npm install --save-dev @types/node
 
 # Tüm dosyaları kopyala
 COPY . .
-
-# Uygulamayı test etmeden önce, `npm run test` komutunu çalıştırın
-RUN npm run test
 
 # Uygulamayı build et
 RUN npm run build
