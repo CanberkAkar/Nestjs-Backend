@@ -1,5 +1,5 @@
 # Node.js tabanlı bir image kullan (Alpine daha hafif)
-FROM node:18-alpine
+FROM node:22-alpine
 
 # Çalışma dizinini belirle
 WORKDIR /app
