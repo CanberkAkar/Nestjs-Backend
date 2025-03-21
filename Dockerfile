@@ -26,7 +26,7 @@ RUN npm run test
 RUN npm run build
 
 # Portu aç
-EXPOSE 3000
+EXPOSE 3003
 
 # Uygulama için uygun başlatma komutu
-CMD ["npm", "run", "start:prod"]
+CMD ["node", "dist/main"]
