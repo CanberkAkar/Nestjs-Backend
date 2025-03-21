@@ -1,5 +1,5 @@
 # Node.js tabanlı bir image kullan (Alpine daha hafif)
-FROM node:22-alpine
+FROM node:18-alpine
 
 # Çalışma dizinini belirle
 WORKDIR /app
@@ -19,14 +19,14 @@ RUN npm install --save-dev @types/node
 # Tüm dosyaları kopyala
 COPY . .
 
-# Testleri çalıştır
-RUN npm run test -- --watch=false --bail
+# Uygulamayı test etmeden önce, `npm run test` komutunu çalıştırın
+RUN npm run test
 
-# Testler başarılıysa build al
+# Uygulamayı build et
 RUN npm run build
 
 # Portu aç
 EXPOSE 3000
 
 # Uygulama için uygun başlatma komutu
-CMD ["node", "dist/main.js"]
+CMD ["npm", "run", "start:prod"]
