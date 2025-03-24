@@ -12,12 +12,15 @@ RUN npm install
 
 # NestJS CLI'yı global olarak yükle
 RUN npm install -g @nestjs/cli
- 
+
 # @types/node paketini yükle
 RUN npm install --save-dev @types/node
 
 # Tüm dosyaları kopyala
 COPY . .
+
+# Testleri çalıştır
+RUN npm run test:e2e
 
 # Uygulamayı build et
 RUN npm run build
@@ -25,5 +28,5 @@ RUN npm run build
 # Portu aç
 EXPOSE 3000
 
-# Uygulama için uygun başlatma komutu
+# Uygulamayı başlat
 CMD ["node", "dist/main"]
