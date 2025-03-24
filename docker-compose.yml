@@ -12,3 +12,4 @@ services:
     volumes:
       - .:/app
     command: ["npm", "run", "start:prod"]
+ 
