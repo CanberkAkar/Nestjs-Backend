@@ -25,7 +25,7 @@ function generateKey(): string {
     async list() {
         await this.logger.log('Attempting to list all users');
         const users = await this.userRepository.find();
-        return { status: "201", user: users };
+        return { status: "200", user: users };
     }
 
     async createUser(createUserDto: CreateUserDto) {
